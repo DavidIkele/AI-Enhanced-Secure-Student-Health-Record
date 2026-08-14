@@ -27,7 +27,7 @@ INSERT INTO `ai_predictions` (`id`, `student_id`, `prediction_type`, `risk_level
 --
 
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` (`id`, `student_id`, `healthcare_staff_id`, `scheduled_at`, `duration_minutes`, `reason`, `status`, `cancellation_reason`, `admin_notes`, `requested_by`, `handled_by`, `created_at`, `updated_at`, `occupies_at`) VALUES (1,1,2,'2026-08-12 10:00:00',30,'Follow-up review','approved',NULL,NULL,4,3,'2026-08-12 13:26:06','2026-08-12 13:26:06','2026-08-12 10:00:00'),(2,2,2,'2026-08-14 11:00:00',30,'Asthma review','pending',NULL,NULL,5,NULL,'2026-08-12 13:26:06','2026-08-12 13:26:06','2026-08-14 11:00:00'),(3,1,1,'2026-08-05 09:30:00',30,'Lab result collection','completed',NULL,NULL,4,2,'2026-08-12 13:26:06','2026-08-12 13:26:06',NULL);
+INSERT INTO `appointments` (`id`, `student_id`, `healthcare_staff_id`, `scheduled_at`, `duration_minutes`, `reason`, `status`, `cancellation_reason`, `admin_notes`, `requested_by`, `handled_by`, `created_at`, `updated_at`) VALUES (1,1,2,'2026-08-12 10:00:00',30,'Follow-up review','approved',NULL,NULL,4,3,'2026-08-12 13:26:06','2026-08-12 13:26:06'),(2,2,2,'2026-08-14 11:00:00',30,'Asthma review','pending',NULL,NULL,5,NULL,'2026-08-12 13:26:06','2026-08-12 13:26:06'),(3,1,1,'2026-08-05 09:30:00',30,'Lab result collection','completed',NULL,NULL,4,2,'2026-08-12 13:26:06','2026-08-12 13:26:06');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 
 --
