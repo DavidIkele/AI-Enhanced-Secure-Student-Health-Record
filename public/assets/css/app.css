@@ -1,0 +1,444 @@
+/* ==========================================================================
+   Initial application stylesheet
+   Accessible-by-default foundation:
+   - visible keyboard focus
+   - skip link
+   - responsive layout support
+   - reduced-motion respect
+   ========================================================================== */
+
+:root {
+    --sr-brand: #16324f;
+    --sr-brand-dark: #0f2440;
+    --sr-link: #16324f;
+    --sr-gold: #c49a27;
+    --sr-gold-strong: #7a5f14;
+}
+
+/* ---- Base ---- */
+body {
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+a {
+    color: var(--sr-link);
+    text-decoration: underline;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--sr-brand-dark);
+    text-decoration: underline;
+}
+
+/* ---- Skip link (WCAG 2.4.1 Bypass Blocks) ---- */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    z-index: 9999;
+    background: #111827;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 0 0 0.5rem 0;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: 0;
+    color: #ffffff;
+    outline: 3px solid var(--sr-gold, #d4af37);
+    outline-offset: 2px;
+}
+
+/* ---- Visible keyboard focus (WCAG 2.4.7 / 2.4.13) ----
+   A two-ring indicator keeps the dark focus ring at >= 3:1 contrast
+   against light page backgrounds while the inner white ring keeps it
+   visible against dark/coloured element backgrounds (e.g. the active
+   nav highlight or primary buttons). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 5px #111827;
+    border-radius: 0.25rem;
+}
+
+/* ---- Scrollable regions keyboard access (WCAG 2.1.1) ---- */
+.table-responsive:focus,
+.table-scroll:focus,
+.chart-hour-table:focus {
+    outline: 3px solid #111827;
+    outline-offset: 2px;
+}
+
+/* ---- Header / navigation ---- */
+.site-header {
+    background-color: rgba(248, 250, 252, 0.96);
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(17, 24, 39, 0.06);
+}
+
+.site-accent {
+    height: 3px;
+    background: linear-gradient(90deg, #16324f, #7a5f14 55%, #c49a27);
+}
+
+.site-brand {
+    color: #111827;
+    border-radius: 0.375rem;
+}
+
+.site-brand:hover,
+.site-brand:focus {
+    color: #111827;
+}
+
+.site-brand-mark {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    object-fit: contain;
+    border-radius: 0.375rem;
+}
+
+.site-brand-text {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #111827;
+}
+
+.site-brand-sub {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sr-gold-strong);
+}
+
+/* Mobile menu toggle */
+.site-nav-toggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    color: #334155;
+    order: 3;
+}
+
+.site-nav-toggler .hamburger {
+    display: block;
+    position: relative;
+    width: 1.25rem;
+    height: 0.14rem;
+    background-color: currentColor;
+    border-radius: 1px;
+}
+
+.site-nav-toggler .hamburger::before,
+.site-nav-toggler .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.14rem;
+    background-color: currentColor;
+    border-radius: 1px;
+}
+
+.site-nav-toggler .hamburger::before {
+    top: -0.4rem;
+}
+
+.site-nav-toggler .hamburger::after {
+    top: 0.4rem;
+}
+
+@media (min-width: 992px) {
+    .site-nav-toggler {
+        display: none;
+    }
+
+    .site-nav-collapse.collapse {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+/* Navigation links */
+.site-nav {
+    padding: 0.25rem 0 0.75rem;
+}
+
+.site-nav .nav-link {
+    color: var(--sr-brand-dark);
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+.site-nav .nav-link:hover {
+    background-color: #e2e9f3;
+    color: var(--sr-brand-dark);
+}
+
+.site-nav .nav-link.active {
+    background-color: var(--sr-brand);
+    color: #ffffff;
+}
+
+@media (min-width: 992px) {
+    .site-nav {
+        padding-bottom: 0;
+    }
+}
+
+/* ---- Footer ---- */
+.site-footer {
+    background-color: #152337;
+    color: #cbd5e1;
+    border-top: 3px solid var(--sr-gold);
+}
+
+.site-footer .site-brand-text {
+    color: #f1f5f9;
+}
+
+.site-footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.site-footer h6 {
+    color: #e0e7ff;
+}
+
+.site-footer .text-muted {
+    color: #94a3b8 !important;
+}
+
+.site-footer .border-top {
+    border-color: rgba(203, 213, 225, 0.2) !important;
+}
+
+/* ---- Tables ---- */
+/* WCAG-compatible zebra striping uses subdued contrast, never color alone. */
+.table-scroll {
+    overflow-x: auto;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+/* ---- Alerts: never color-only ---- */
+.alert {
+    border-left-width: 4px;
+}
+
+/* ---- Analytics charts (PROMPT 7) ---- */
+/* Charts are enhancements only; every chart has an accompanying table.
+   Fixed-height containers keep canvases usable across zoom/reflow. */
+.chart-box {
+    position: relative;
+    height: 22rem;
+    margin-bottom: 0.5rem;
+}
+
+.chart-box canvas {
+    max-width: 100%;
+}
+
+/* The hourly table is 24 rows; cap its height and scroll for reflow. */
+.chart-hour-table {
+    max-height: 22rem;
+    overflow-y: auto;
+}
+
+/* ---- Homepage (landing) ---- */
+:root {
+    --sr-bg-soft: #f6f4ec;
+    --sr-surface: #ffffff;
+    --sr-border: #e2e8f0;
+    --sr-border-soft: #dcc384;
+    --sr-text: #1f2937;
+    --sr-text-secondary: #4b5563;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hero */
+.home-hero {
+    background: linear-gradient(135deg, #0f2440 0%, #16324f 55%, #1e4068 100%);
+    border-radius: 1rem;
+    color: #ffffff;
+}
+
+.home-eyebrow {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #d4af37;
+}
+
+.home-hero-lead {
+    color: #dbeafe;
+}
+
+.home-proof-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+}
+
+.home-hero-proof {
+    border-radius: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    font-size: 0.95rem;
+}
+
+.btn-hero-primary {
+    background-color: #ffffff;
+    color: var(--sr-brand-dark);
+    font-weight: 600;
+}
+
+.btn-hero-primary:hover,
+.btn-hero-primary:focus {
+    background-color: #e2e8f0;
+    color: var(--sr-brand-dark);
+}
+
+.btn-hero-ghost {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.btn-hero-ghost:hover,
+.btn-hero-ghost:focus {
+    background-color: rgba(255, 255, 255, 0.22);
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* Section headers */
+.section-kicker {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--sr-gold-strong);
+}
+
+/* Feature cards */
+.feature-card {
+    background-color: var(--sr-surface);
+    border: 1px solid var(--sr-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.feature-card:hover {
+    border-color: var(--sr-border-soft);
+    box-shadow: 0 10px 25px rgba(22, 50, 79, 0.12);
+}
+
+.feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background-color: #f1e9cc;
+    color: var(--sr-gold-strong);
+    margin-bottom: 1rem;
+}
+
+.feature-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Audience cards */
+.audience-card {
+    background-color: var(--sr-bg-soft);
+    border: 1px solid var(--sr-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+.audience-list {
+    list-style: none;
+    padding-left: 1.25rem;
+    margin-bottom: 0;
+}
+
+.audience-list li {
+    margin-bottom: 0.35rem;
+}
+
+.audience-list li::before {
+    content: "";
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background-color: var(--sr-gold);
+    margin-right: 0.5rem;
+    vertical-align: 0.08rem;
+}
+
+/* Security band & closing CTA */
+.security-band {
+    background-color: var(--sr-brand-dark);
+    color: #ffffff;
+    border-radius: 1rem;
+}
+
+.security-band .section-kicker {
+    color: #d4af37;
+}
+
+.security-disclaimer {
+    color: #dbeafe;
+}
+
+.home-cta {
+    background: linear-gradient(135deg, #0f2440 0%, #16324f 70%, #1e4068 100%);
+    border-radius: 1rem;
+    color: #ffffff;
+}
+
+/* ---- Reduced motion (WCAG 2.3.3) ---- */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

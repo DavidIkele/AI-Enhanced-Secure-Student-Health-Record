@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+logs/*
+!logs/.gitkeep
+# Trained model artifacts are never committed; only the manifest is.
+models/*
+!models/registry.json

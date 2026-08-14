@@ -1,0 +1,14 @@
+# Deny web access to application internals when the project root is served.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Return 403 for anything under internal directories.
+    RewriteRule ^(app|database|tests|ai-service)/ - [F,L]
+    # Deny dotfiles (e.g. .env).
+    RewriteRule (^\.|\.env$) - [F,L]
+</IfModule>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

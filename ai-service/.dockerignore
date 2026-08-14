@@ -1,0 +1,15 @@
+.git
+.gitignore
+.env
+.env.example
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+logs/*
+models/*/v*/*
+models/*.joblib
+tests/
+README.md
+Dockerfile
+.dockerignore

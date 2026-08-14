@@ -1,0 +1,29 @@
+# Front controller rewrite: route all non-file requests through app_entry.php.
+# The local host security policy blocks the literal filenames "index.php",
+# "front.php" and "gateway.php" in this web root (write access denied at the
+# filesystem level), so the front controller is named app_entry.php
+# (functionally standard). DirectoryIndex maps the folder root to it as well.
+Options -Indexes
+DirectoryIndex app_entry.php
+
+RewriteEngine On
+
+# Never serve dotfiles.
+RewriteRule (^\.|\.(env|gitignore)$) - [F,L]
+
+# --- HTTPS FORCE ---
+# Redirect HTTP to HTTPS for all non-loopback hosts.
+# Loopback (localhost/127.0.0.1/[::1]) is exempt so the local XAMPP
+# development instance keeps working over plain HTTP without a TLS cert.
+# In production the real hostname is forced to HTTPS; the Secure cookie flag
+# follows (COOKIE_SECURE=auto) and HSTS is emitted once HTTPS is active.
+# If behind a load balancer that already terminates HTTPS, keep this block
+# commented and ensure COOKIE_SECURE is set appropriately.
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$ [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Route existing files/dirs directly; everything else to the front controller.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ app_entry.php [QSA,L]

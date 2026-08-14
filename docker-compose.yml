@@ -1,0 +1,86 @@
+# Full-stack local deployment for the Student Health Record System.
+#
+#   docker compose up --build
+#   -> web: http://localhost:8080   (PHP app)
+#   -> db:  MySQL on localhost:3306 (internal only)
+#   -> ai:  FastAPI on localhost:8000 (internal only)
+#
+# All secrets come from the root .env file at runtime (never baked into an
+# image). docker compose reads .env automatically for variable substitution;
+# the values below only reference those variables, they do not contain them.
+#
+# NOTE: the AI service binds 0.0.0.0 *inside* the compose network only. Its
+# port is NOT published to the host, so it stays unreachable from outside.
+
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-student_health}
+      MYSQL_USER: ${DB_USERNAME:-srms_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+    volumes:
+      - db_data:/var/lib/mysql
+      # First-run initialisation: schema, then seed data.
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/seed_data.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  ai:
+    build: ./ai-service
+    restart: unless-stopped
+    environment:
+      AI_HOST: 0.0.0.0
+      AI_PORT: "8000"
+      AI_API_KEY: ${AI_API_KEY:?set AI_API_KEY in .env}
+      APP_ENV: production
+      APP_DEBUG: "false"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    # Port intentionally NOT published - only reachable on the compose network.
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      ai:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: ${DB_NAME:-student_health}
+      DB_USERNAME: ${DB_USERNAME:-srms_user}
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      DB_CHARSET: utf8mb4
+      AI_ENABLED: "true"
+      AI_BASE_URL: http://ai:8000
+      AI_API_KEY: ${AI_API_KEY:?set AI_API_KEY in .env}
+      AI_ALLOWED_HOSTS: ai,127.0.0.1,localhost,::1
+      AI_CONNECT_TIMEOUT: "3"
+      AI_TIMEOUT: "8"
+      AI_RETRIES: "1"
+      COOKIE_SECURE: auto
+      SESSION_NAME: srms_session
+      SESSION_LIFETIME: "0"
+      SESSION_TIMEOUT: "30"
+      RATE_LIMIT_ATTEMPTS: "5"
+      RATE_LIMIT_WINDOW: "300"
+      LOCKOUT_HOURS: "1"
+    ports:
+      - "8080:80"
+
+volumes:
+  db_data:

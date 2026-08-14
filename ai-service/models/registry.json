@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "description": "Model version manifest for the AI decision-support service.",
+  "models": [
+    {
+      "prediction_type": "asthma_exacerbation",
+      "version": "1.0",
+      "status": "ready"
+    },
+    {
+      "prediction_type": "malaria_risk",
+      "version": "1.0",
+      "status": "ready"
+    },
+    {
+      "prediction_type": "typhoid_risk",
+      "version": "1.0",
+      "status": "ready"
+    }
+  ]
+}

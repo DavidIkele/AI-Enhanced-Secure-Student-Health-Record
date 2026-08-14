@@ -1,0 +1,19 @@
+# Normalize line endings for a cross-platform repo.
+* text=auto
+
+*.php text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.sql text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.htaccess text eol=lf
+.env.example text eol=lf

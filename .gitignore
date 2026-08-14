@@ -1,0 +1,28 @@
+# Dependencies / build artifacts
+/vendor/
+/node_modules/
+
+# Environment files (keep .env.example; ignore real .env)
+.env
+*.env.local
+*.env.production
+
+# Logs and sessions
+app/Logs/*.log
+/app/Logs/*.log
+database/seed_data.err
+
+# Internal development specs / prompts (not part of the public repo)
+/.development/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+
+# Test scratch
+/tests/tmp/
+
+# Windows-specific
+*.bat.tmp
+start_ai_service.bat
