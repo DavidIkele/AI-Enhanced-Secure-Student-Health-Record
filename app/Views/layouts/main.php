@@ -104,5 +104,6 @@
     <?php endif; ?>
     <script src="<?= e(base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')) ?>" defer></script>
     <script src="<?= e(base_url('assets/js/app.js')) ?>" defer></script>
+    <script src="<?= e(base_url('assets/vendor/accessibility-widget/accessibility-widget.js')) ?>"></script>
 </body>
 </html>

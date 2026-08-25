@@ -1,0 +1,333 @@
+/* ============================================
+   Accessibility Widget - Styles
+   ============================================ */
+
+/* --- Widget Toggle Button --- */
+#a11y-widget-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #cc5500;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s, transform 0.2s;
+}
+
+#a11y-widget-toggle:hover,
+#a11y-widget-toggle:focus-visible {
+  background: #b04a00;
+  transform: scale(1.08);
+  outline: 3px solid #b04a00;
+  outline-offset: 2px;
+}
+
+/* --- Panel --- */
+#a11y-panel {
+  position: fixed;
+  bottom: 86px;
+  right: 20px;
+  z-index: 99998;
+  width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  color: #1a1a1a;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  display: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+#a11y-panel.open {
+  display: block;
+}
+
+#a11y-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #cc5500;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px 10px 0 0;
+}
+
+#a11y-panel-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+#a11y-panel-header button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+#a11y-panel-body {
+  padding: 16px 18px;
+}
+
+/* --- Section inside panel --- */
+.a11y-section {
+  margin-bottom: 18px;
+}
+
+.a11y-section:last-child {
+  margin-bottom: 0;
+}
+
+.a11y-section h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+}
+
+/* --- Buttons row --- */
+.a11y-btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.a11y-btn {
+  flex: 1 1 auto;
+  min-width: 70px;
+  padding: 10px 6px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.a11y-btn:hover {
+  background: #e8f0fe;
+  border-color: #cc5500;
+}
+
+.a11y-btn:focus-visible {
+  outline: 3px solid #cc5500;
+  outline-offset: 2px;
+}
+
+.a11y-btn.active {
+  background: #cc5500;
+  color: #fff;
+  border-color: #cc5500;
+}
+
+.a11y-btn.active:hover {
+  background: #b04a00;
+}
+
+/* --- Slider --- */
+.a11y-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.a11y-slider-group label {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 60px;
+}
+
+.a11y-slider-group input[type="range"] {
+  flex: 1;
+  accent-color: #cc5500;
+}
+
+.a11y-slider-group .a11y-slider-val {
+  font-size: 13px;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* --- Toggle switch --- */
+.a11y-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.a11y-toggle-row span {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.a11y-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.a11y-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.a11y-toggle[aria-checked="true"] {
+  background: #cc5500;
+}
+
+.a11y-toggle[aria-checked="true"]::after {
+  transform: translateX(20px);
+}
+
+.a11y-toggle:focus-visible {
+  outline: 3px solid #cc5500;
+  outline-offset: 2px;
+}
+
+/* --- On-screen keyboard --- */
+#a11y-onscreen-kb {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99997;
+  background: #1a1a2e;
+  padding: 8px 6px 12px;
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
+}
+
+#a11y-onscreen-kb.open {
+  display: flex;
+}
+
+#a11y-onscreen-kb button {
+  min-width: 42px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background: #2d2d44;
+  color: #eee;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+#a11y-onscreen-kb button:hover {
+  background: #3d3d5c;
+}
+
+#a11y-onscreen-kb button:focus-visible {
+  outline: 2px solid #cc5500;
+  outline-offset: 1px;
+}
+
+#a11y-onscreen-kb button.a11y-kb-space {
+  min-width: 180px;
+}
+
+#a11y-onscreen-kb button.a11y-kb-backspace,
+#a11y-onscreen-kb button.a11y-kb-enter {
+  min-width: 72px;
+  background: #cc5500;
+  color: #fff;
+}
+
+#a11y-onscreen-kb button.a11y-kb-backspace:hover,
+#a11y-onscreen-kb button.a11y-kb-enter:hover {
+  background: #b04a00;
+}
+
+/* --- TTS highlight --- */
+.a11y-tts-highlight {
+  background: #ffe066 !important;
+  color: #000 !important;
+  outline: 2px solid #cc5500 !important;
+}
+
+/* --- High contrast overrides --- */
+body.a11y-hc-dark {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.a11y-hc-dark a {
+  color: #6ec6ff !important;
+}
+
+body.a11y-hc-dark button,
+body.a11y-hc-dark input,
+body.a11y-hc-dark select,
+body.a11y-hc-dark textarea {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+body.a11y-hc-light {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+body.a11y-hc-light a {
+  color: #0000ee !important;
+}
+
+/* Focus ring for keyboard nav */
+body.a11y-focus-visible *:focus-visible {
+  outline: 3px solid #ff4500 !important;
+  outline-offset: 2px !important;
+}
+
+/* Screen reader only utility (visual only, announced by screen readers) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
