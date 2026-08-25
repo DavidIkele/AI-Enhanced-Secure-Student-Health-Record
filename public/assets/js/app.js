@@ -24,7 +24,7 @@ window.SHR = (function () {
         });
     }
 
-    /* Appointment availability (PROMPT 6): progressively enhance the request
+    /* Appointment availability : progressively enhance the request
        form by refreshing the availability table when the staff member or date
        changes, and keeping the "Show availability calendar" link in sync with
        the chosen staff member. The server always renders the table for a valid
@@ -86,7 +86,7 @@ window.SHR = (function () {
         return prefix + path;
     }
 
-    /* Visit history analytics (PROMPT 7): progressively render Chart.js charts
+    /* Visit history analytics : progressively render Chart.js charts
        from the JSON block emitted by the server. Charts are a progressive
        enhancement only — every chart has an accompanying table with the same
        figures, so the page remains fully usable without JavaScript. */

@@ -2,7 +2,7 @@
 
 Consolidated testing summary for the AI-Enhanced Secure Web-Based Student
 Health Record Management System. Full detail lives in
-`tests/p18/PROMPT_18_REPORT.md`.
+`tests/system/TEST_REPORT.md`.
 
 > Scope note: this report summarises the checks executed in this project's
 > testing cycle. It does **not** constitute medical certification or clinical
@@ -102,7 +102,7 @@ navigation for every module:
 
 ## Databases of evidence
 
-- `tests/p18/PROMPT_18_REPORT.md` — full PROMPT 18 report.
+- `tests/system/TEST_REPORT.md` — full system test report.
 - Re-runnable suites kept in the workspace test directory
   (`reliability.php`, `concurrency.php`, `functional.php`,
   `functional_write.php`, `security.php`, `ai_e2e.php`, `HttpTestClient.php`).

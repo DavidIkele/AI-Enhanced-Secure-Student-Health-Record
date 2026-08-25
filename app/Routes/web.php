@@ -31,7 +31,7 @@ use App\Middleware\RoleMiddleware;
 $router->get('/', [HomeController::class, 'index'], 'home');
 $router->get('/system/health', [SystemController::class, 'health'], 'system.health');
 
-// Authentication (PROMPT 3)
+// Authentication
 $router->get('/auth/login', [AuthController::class, 'showLogin'], 'auth.login', [GuestMiddleware::class]);
 $router->post('/auth/login', [AuthController::class, 'login'], 'auth.login.post', [GuestMiddleware::class]);
 // Student self-registration
@@ -39,7 +39,7 @@ $router->get('/auth/register', [AuthController::class, 'showRegister'], 'auth.re
 $router->post('/auth/register', [AuthController::class, 'register'], 'auth.register.post', [GuestMiddleware::class]);
 $router->post('/auth/logout', [AuthController::class, 'logout'], 'auth.logout', [AuthMiddleware::class]);
 
-// Protected area (role-specific dashboards arrive in PROMPT 4)
+// Protected area (role-specific dashboards)
 $router->get('/dashboard', [DashboardController::class, 'index'], 'dashboard', [AuthMiddleware::class]);
 
 // My profile (ownership enforced by session; students only have student rows)
@@ -54,7 +54,7 @@ $router->post('/profile/preferences', [ProfileController::class, 'updatePreferen
 // Download a JSON snapshot of the authenticated user's own data.
 $router->get('/profile/data-export', [ProfileController::class, 'dataExport'], 'profile.data_export', [AuthMiddleware::class]);
 
-// Health records - staff & administrators only (RBAC / PROMPT 4)
+// Health records - staff & administrators only (RBAC)
 $router->get('/records', [StudentRecordsController::class, 'index'], 'records.index', [
     AuthMiddleware::class,
     PermissionMiddleware::require('records.view.any'),
@@ -64,7 +64,7 @@ $router->get('/records/{studentId}', [StudentRecordsController::class, 'show'], 
     PermissionMiddleware::require('records.view.any'),
 ]);
 
-// Health record management - write operations (PROMPT 5)
+// Health record management - write operations
 $router->get('/records/{studentId}/edit', [StudentRecordsController::class, 'editProfile'], 'records.edit', [
     AuthMiddleware::class,
     PermissionMiddleware::require('records.manage'),
@@ -86,7 +86,7 @@ $router->post('/records/{studentId}/visits', [StudentRecordsController::class, '
     PermissionMiddleware::require('records.manage'),
 ]);
 
-// Appointments (PROMPT 6)
+// Appointments
 $router->get('/appointments', [AppointmentController::class, 'index'], 'appointments.index', [AuthMiddleware::class]);
 $router->get('/appointments/calendar', [AppointmentController::class, 'calendar'], 'appointments.calendar', [AuthMiddleware::class]);
 $router->get('/appointments/availability', [AppointmentController::class, 'availability'], 'appointments.availability', [AuthMiddleware::class]);
@@ -110,13 +110,13 @@ $router->post('/appointments/{id}/reject', [AppointmentController::class, 'rejec
 $router->get('/appointments/{id}/reschedule', [AppointmentController::class, 'rescheduleForm'], 'appointments.reschedule.form', [AuthMiddleware::class]);
 $router->post('/appointments/{id}/reschedule', [AppointmentController::class, 'reschedule'], 'appointments.reschedule', [AuthMiddleware::class]);
 
-// Visit History Analytics (PROMPT 7)
+// Visit History Analytics
 $router->get('/analytics/visits', [VisitAnalyticsController::class, 'visits'], 'analytics.visits', [
     AuthMiddleware::class,
     PermissionMiddleware::require('analytics.view'),
 ]);
 
-// Outbreak / illness-pattern detection (PROMPT 10)
+// Outbreak / illness-pattern detection
 $router->get('/analytics/outbreaks', [OutbreakController::class, 'index'], 'analytics.outbreaks', [
     AuthMiddleware::class,
     PermissionMiddleware::require('analytics.view'),
@@ -126,7 +126,7 @@ $router->post('/analytics/outbreaks/run', [OutbreakController::class, 'run'], 'a
     PermissionMiddleware::require('analytics.manage'),
 ]);
 
-// Personalized health insights (PROMPT 11)
+// Personalized health insights
 $router->post('/records/{studentId}/insights/generate', [InsightController::class, 'generate'], 'insights.generate', [
     AuthMiddleware::class,
     PermissionMiddleware::require('records.manage'),
@@ -135,7 +135,7 @@ $router->post('/records/{studentId}/insights/generate', [InsightController::clas
 $router->post('/profile/insights/{insightId}/read', [InsightController::class, 'markRead'], 'insights.read', [AuthMiddleware::class]);
 $router->post('/profile/insights/{insightId}/dismiss', [InsightController::class, 'dismiss'], 'insights.dismiss', [AuthMiddleware::class]);
 
-// AI decision support - server-to-server PHP->FastAPI integration (PROMPT 12).
+// AI decision support - server-to-server PHP->FastAPI integration.
 // The browser never talks to the FastAPI service directly.
 $router->post('/records/{studentId}/predictions/{type}', [AiController::class, 'predict'], 'predictions.run', [
     AuthMiddleware::class,
@@ -152,7 +152,7 @@ $router->get('/system/ai/health', [AiController::class, 'health'], 'system.ai.he
     PermissionMiddleware::require('analytics.view'),
 ]);
 
-// Notifications & alerts (PROMPT 13)
+// Notifications & alerts
 // Inbox + read/unread actions; the notifications.manage check also runs in the
 // controller (all seeded roles hold it; defence in depth).
 $router->get('/notifications', [NotificationController::class, 'index'], 'notifications.index', [AuthMiddleware::class]);
@@ -175,7 +175,7 @@ $router->get('/admin/area', [SystemController::class, 'adminArea'], 'admin.area'
     RoleMiddleware::oneOf('admin'),
 ]);
 
-// Audit log (PROMPT 14) - read-only viewer, audit.view permission (admin role).
+// Audit log - read-only viewer, audit.view permission (admin role).
 $router->get('/admin/audit', [AuditLogController::class, 'index'], 'admin.audit', [
     AuthMiddleware::class,
     PermissionMiddleware::require('audit.view'),

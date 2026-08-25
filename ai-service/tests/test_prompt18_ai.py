@@ -1,4 +1,4 @@
-"""PROMPT 18 — AI testing extensions.
+"""AI testing extensions.
 
 Covers dimensions required by the system test plan that the base API suite
 does not assert explicitly:

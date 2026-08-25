@@ -252,7 +252,7 @@ textarea:focus-visible,
     border-left-width: 4px;
 }
 
-/* ---- Analytics charts (PROMPT 7) ---- */
+/* ---- Analytics charts  ---- */
 /* Charts are enhancements only; every chart has an accompanying table.
    Fixed-height containers keep canvases usable across zoom/reflow. */
 .chart-box {

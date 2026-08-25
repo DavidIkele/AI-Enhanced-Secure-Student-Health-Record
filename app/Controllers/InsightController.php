@@ -14,7 +14,7 @@ use App\Services\AuthService;
 use App\Services\InsightEngine;
 
 /**
- * Personalized health insights (PROMPT 11).
+ * Personalized health insights.
  *
  * Insights are informational and non-diagnostic (see InsightEngine). They are
  * generated from a student's own recorded clinical data by staff (records.manage)

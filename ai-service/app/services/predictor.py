@@ -1,4 +1,4 @@
-"""Loaded decision-support model wrapper (PROMPT 9).
+"""Loaded decision-support model wrapper .
 
 ``TrainedModel`` wraps a fitted scikit-learn pipeline plus the sidecar metadata
 that describes it (ordered feature names, risk thresholds, positive class).

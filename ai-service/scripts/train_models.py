@@ -1,4 +1,4 @@
-"""Train and package demo decision-support models (PROMPT 9).
+"""Train and package demo decision-support models.
 
 Writes model artifacts for every prediction type into the configured model
 store and marks them ``ready`` in ``registry.json``.

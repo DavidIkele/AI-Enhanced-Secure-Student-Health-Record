@@ -4,7 +4,7 @@ Separate Python (3.12+) FastAPI service for the Student Health Record System.
 Provides the model-version registry and prediction API. **Decision support only
 — never a medical diagnosis.**
 
-## Security model (PROMPT 8)
+## Security model
 - Binds to `127.0.0.1` only. Never expose it publicly.
 - Every endpoint except `GET /health` requires a shared `AI_API_KEY`
   (`X-API-Key` header or `Authorization: Bearer`). Fail-closed when unset.
@@ -45,7 +45,7 @@ returns ranked suggestions (`condition`, `level`, `score`, `confidence`,
 `advice`) plus the matched symptom terms. Output is decision-support only —
 never a diagnosis. No PII is sent or stored.
 
-## Model layout (PROMPT 9)
+## Model layout
 ```
 models/
   registry.json                  # version manifest (source of truth)
@@ -56,7 +56,7 @@ models/
     sample_features.json         # example input frame (de-identified)
 ```
 
-## Trained models (PROMPT 9)
+## Trained models
 
 The service ships with demo pipelines fitted on deterministic synthetic data
 (documented in `app/services/packaging.py`). Rebuild or re-train them with:

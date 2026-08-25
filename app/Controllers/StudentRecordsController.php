@@ -12,9 +12,9 @@ use App\Services\AuditLogService;
 use App\Services\Validator;
 
 /**
- * Health record management for healthcare staff and administrators (PROMPT 5).
+ * Health record management for healthcare staff and administrators.
  *
- * Authorization model (PROMPT 4):
+ * Authorization model:
  *  - Listing students requires records.view.any (staff/admin).
  *  - Viewing a student's health profile requires records.view.any.
  *  - Creating/updating profile, medical history and clinic visits requires

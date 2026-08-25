@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Outbreak detection / illness-pattern analytics (PROMPT 10).
+ * Outbreak detection / illness-pattern analytics.
  *
  * Detects unusual spikes in coded diagnoses (those carrying an ICD-10 code)
  * at a category level. Categories are aggregated into weekly buckets and each
@@ -314,7 +314,7 @@ final class OutbreakAnalyticsRepository extends BaseRepository
     // ------------------------------------------------------------------
 
     /**
-     * Flagged detection rows in a range, for illness-pattern alerts (PROMPT 13).
+     * Flagged detection rows in a range, for illness-pattern alerts.
      * Category-level aggregate only — no identities. The row id is used as the
      * notification reference so re-running detection over the same period does
      * not stack duplicate alerts (the same row is re-flagged, not re-notified).

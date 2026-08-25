@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/test_client.php';
 
-$BASE = 'http://localhost/AI-Enhanced%20Secure%20Web-Based%20Student%20Health/public';
+$BASE = test_base_url();
 $pass = 0;
 $fail = 0;
 $failures = [];
@@ -21,12 +21,7 @@ function check(string $label, bool $ok, string $detail = ''): void
 
 function db(): PDO
 {
-    return new PDO(
-        'mysql:host=127.0.0.1;port=3307;dbname=student_health;charset=utf8mb4',
-        'root',
-        '',
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
+    return test_db();
 }
 
 $pdo = db();

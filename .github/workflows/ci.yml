@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  php:
+    name: PHP app (lint, unit smoke, security + functional suites)
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: student_health
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: pdo, pdo_mysql, mbstring, curl, json, openssl
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-publish
+
+      - name: Install Composer autoloader
+        run: composer install --no-interaction --no-progress
+
+      - name: Load schema
+        run: mysql -h 127.0.0.1 -uroot -proot student_health < database/schema.sql
+
+      - name: Load seed data
+        run: mysql -h 127.0.0.1 -uroot -proot student_health < database/seed_data.sql
+
+      - name: Lint application PHP files
+        run: |
+          find app database tests -name '*.php' -print0 | while IFS= read -r -d '' f; do
+            php -l "$f" > /dev/null || exit 1
+          done
+
+      - name: Start app on PHP built-in server
+        env:
+          APP_ENV: production
+          APP_DEBUG: "false"
+          APP_URL: http://127.0.0.1:8080
+          DB_HOST: 127.0.0.1
+          DB_PORT: "3306"
+          DB_NAME: student_health
+          DB_USERNAME: root
+          DB_PASSWORD: root
+          COOKIE_SECURE: "auto"
+          AI_ENABLED: "false"
+        run: |
+          php -S 127.0.0.1:8080 tests/router.php > /tmp/php-server.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8080/ > /dev/null
+
+      - name: Router smoke test
+        run: php tests/router_smoke.php
+
+      - name: Security suite
+        env:
+          TEST_BASE_URL: http://127.0.0.1:8080
+          TEST_DB_HOST: 127.0.0.1
+          TEST_DB_PORT: "3306"
+          TEST_DB_NAME: student_health
+          TEST_DB_USER: root
+          TEST_DB_PASS: root
+        run: php tests/system/security.php
+
+      - name: Functional write-path suite
+        env:
+          TEST_BASE_URL: http://127.0.0.1:8080
+          TEST_DB_HOST: 127.0.0.1
+          TEST_DB_PORT: "3306"
+          TEST_DB_NAME: student_health
+          TEST_DB_USER: root
+          TEST_DB_PASS: root
+        run: php tests/system/functional_write.php
+
+  ai-service:
+    name: AI service (Python unit tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: ai-service
+        run: pip install -r requirements.txt
+
+      - name: Run pytest suite
+        working-directory: ai-service
+        run: pytest

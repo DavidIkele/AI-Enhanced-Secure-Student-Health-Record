@@ -20,9 +20,16 @@ final class Application
     {
         self::definePaths();
 
-        // 1. Autoloader file must be explicitly loaded before it can register.
-        require APP_PATH . '/Core/Autoloader.php';
-        Autoloader::register();
+        // 1. Autoloading. Prefer the Composer-generated autoloader when
+        //    vendor/autoload.php exists (standard PSR-4, `composer install`);
+        //    otherwise fall back to the dependency-free PSR-4 autoloader so
+        //    the app also runs without Composer.
+        if (is_file(ROOT_PATH . '/vendor/autoload.php')) {
+            require ROOT_PATH . '/vendor/autoload.php';
+        } else {
+            require APP_PATH . '/Core/Autoloader.php';
+            Autoloader::register();
+        }
 
         // 2. Helpers + configuration.
         require APP_PATH . '/Helpers/helpers.php';

@@ -54,7 +54,7 @@ class SystemController extends BaseController
     }
 
     /**
-     * Administrative area (PROMPT 4). Only users with the admin
+     * Administrative area. Only users with the admin
      * role may reach it; the route is guarded by RoleMiddleware::oneOf('admin').
      */
     public function adminArea(): void

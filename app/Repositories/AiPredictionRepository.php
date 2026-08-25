@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Persistence for AI decision-support predictions (PROMPT 12).
+ * Persistence for AI decision-support predictions.
  *
  * Only de-identified aggregate data is stored: the numeric feature snapshot
  * (the same vector sent to the service) plus the risk output and the model

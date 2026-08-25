@@ -1,4 +1,4 @@
-# Database Setup Guide (PROMPT 2)
+# Database Setup Guide
 
 ## Overview
 

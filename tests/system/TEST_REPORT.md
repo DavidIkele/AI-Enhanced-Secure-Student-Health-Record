@@ -1,4 +1,4 @@
-# PROMPT 18 — COMPLETE SYSTEM TESTING REPORT
+# COMPLETE SYSTEM TESTING REPORT
 
 Project: AI-Enhanced Secure Web-Based Student Health Record Management System
 Date: 2026-08-12
@@ -16,7 +16,7 @@ Environment: XAMPP (Apache 2.4, PHP 8.x, MySQL 8.0, port 3307), Python AI servic
 | Reliability | 21 | 21 | 0 |
 | **Total** | **210** | **210** | **0** |
 
-All test suites are reproducible and committed under `tests/p18/`.
+All test suites are reproducible and committed under `tests/system/`.
 
 ---
 
@@ -24,7 +24,7 @@ All test suites are reproducible and committed under `tests/p18/`.
 
 Every module was tested through the real HTTP stack (Apache + PHP + MySQL), covering index pages, forms, writes, and navigation flows.
 
-**Suite:** `tests/p18/functional.php` + `tests/p18/functional_write.php`
+**Suite:** `tests/system/functional.php` + `tests/system/functional_write.php`
 
 Modules exercised:
 
@@ -62,7 +62,7 @@ Modules exercised:
 
 ## 2. Security Testing (68 PASS / 0 FAIL)
 
-**Suite:** `tests/p18/security.php`
+**Suite:** `tests/system/security.php`
 
 | Category | Coverage | Result |
 |----------|----------|--------|
@@ -83,7 +83,7 @@ Security event logging verified: failed admin access and lockout events are reco
 
 ## 3. AI Testing (60 PASS / 0 FAIL)
 
-**Suite:** `tests/p18/ai_p18.py` (pytest) — 45 tests; `tests/p18/ai_e2e.py` — 15 tests
+**Suite:** `tests/system/ai_unit.py` (pytest) — 45 tests; `tests/system/ai_e2e.php` — 15 tests
 
 | Category | Coverage | Result |
 |----------|----------|--------|
@@ -115,7 +115,7 @@ Security event logging verified: failed admin access and lockout events are reco
 
 ## 5. Reliability Testing (21 PASS / 0 FAIL)
 
-**Suite:** `tests/p18/reliability.php`
+**Suite:** `tests/system/reliability.php`
 
 | Category | Tests | Result |
 |----------|-------|--------|
@@ -136,7 +136,7 @@ Security event logging verified: failed admin access and lockout events are reco
 
 ## 7. Artifacts
 
-- Report: `tests/p18/PROMPT_18_REPORT.md` (persisted in project)
+- Report: `tests/system/TEST_REPORT.md` (persisted in project)
 - Reliability suite: `reliability.php` (21 PASS / 0 FAIL, re-verified)
 - Concurrency suite: `concurrency.php` (re-verified: exactly-one-row PASS)
 - Test client: `HttpTestClient.php` (class name matches filename; project-tree copies are intermittently quarantined by the host's file-sweeper, so canonical copies live in the workspace test directory)

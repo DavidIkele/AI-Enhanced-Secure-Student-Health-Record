@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Audit-trail data access (PROMPT 14).
+ * Audit-trail data access.
  *
  * Read-only: this repository ONLY issues SELECT statements. There is no
  * update/delete path for audit logs at the application level, so records

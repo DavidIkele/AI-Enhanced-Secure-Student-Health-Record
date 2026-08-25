@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Notification data access (PROMPT 13).
+ * Notification data access.
  *
  * Notifications are keyed directly by the recipient user id. All reads and
  * mutations are scoped by that user id so a caller can never read or change

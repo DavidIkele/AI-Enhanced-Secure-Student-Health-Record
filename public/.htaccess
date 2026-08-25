@@ -12,6 +12,12 @@ RewriteEngine On
 RewriteRule (^\.|\.(env|gitignore)$) - [F,L]
 
 # --- HTTPS FORCE ---
+# Treat TLS as active when a reverse proxy (Railway/Render) already
+# terminated it and forwarded plain HTTP, signalling via X-Forwarded-Proto.
+# Without this, %{HTTPS} stays "off" behind the proxy and the HTTPS-force
+# rule below loops forever (301 to the same URL).
+SetEnvIf X-Forwarded-Proto "^https$" HTTPS=on
+
 # Redirect HTTP to HTTPS for all non-loopback hosts.
 # Loopback (localhost/127.0.0.1/[::1]) is exempt so the local XAMPP
 # development instance keeps working over plain HTTP without a TLS cert.
@@ -20,6 +26,7 @@ RewriteRule (^\.|\.(env|gitignore)$) - [F,L]
 # If behind a load balancer that already terminates HTTPS, keep this block
 # commented and ensure COOKIE_SECURE is set appropriately.
 RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
 RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$ [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 

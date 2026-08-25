@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 /**
- * Smoke check: router typed-parameter dispatch (PROMPT 5 fix).
- * Usage: C:\xampp\php\php.exe tests\router_smoke.php
+ * Smoke check: router typed-parameter dispatch.
+ * Usage: php tests/router_smoke.php
  */
 
 if (!defined('ROOT_PATH')) {

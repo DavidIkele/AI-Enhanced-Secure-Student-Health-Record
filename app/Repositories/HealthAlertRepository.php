@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Authorized health-alert data access (PROMPT 13).
+ * Authorized health-alert data access.
  *
  * Health alerts are authored by authorized clinic staff (alerts.manage) and
  * recorded here as an auditable alert entry. Delivery to the student's

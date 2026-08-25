@@ -10,7 +10,7 @@ use App\Services\AuditLogService;
 use App\Services\AuthService;
 
 /**
- * Audit-log viewer (PROMPT 14).
+ * Audit-log viewer.
  *
  * Access is restricted to the `audit.view` permission (seeded on the
  * Administrator role only). The viewer is strictly read-only: there is no

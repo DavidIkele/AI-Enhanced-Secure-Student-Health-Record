@@ -1,8 +1,8 @@
 # Security Checklist
 
-Objective evidence from the PROMPT 18 security suite (68 checks) and code
-review. Run these checks on every environment before it handles real data.
-This list is a **baseline review**, not a guarantee of perfect security.
+Objective evidence from the committed security test suite (68 checks) and
+code review. Run these checks on every environment before it handles real
+data. This list is a **baseline review**, not a guarantee of perfect security.
 
 ## Authentication & session
 
@@ -19,7 +19,7 @@ This list is a **baseline review**, not a guarantee of perfect security.
 - [ ] Permission checks via `PermissionMiddleware::require(...)`; role boundary via `RoleMiddleware::oneOf('admin')` for `/admin/*`.
 - [ ] Controller-level ownership checks prevent IDOR/BOLA (student may only access own records/insights/appointments).
 - [ ] RBAC matrix: student/staff/admin mapped in `database/seed.php`.
-- [ ] No privileged route reachable by unauthenticated or lower-role users (verified by PROMPT 18 privilege-escalation + auth-bypass checks).
+- [ ] No privileged route reachable by unauthenticated or lower-role users (verified by the security suite privilege-escalation + auth-bypass checks).
 
 ## Input validation & injection
 
@@ -74,7 +74,9 @@ This list is a **baseline review**, not a guarantee of perfect security.
 
 ## Runbook (post-change re-run)
 
-1. `C:\xampp\php\php.exe database\database_verify.php`
-2. Re-run the PROMPT 18 suites (`functional.php`, `security.php`, `ai_e2e.php`, `reliability.php`) from the workspace test directory after any code change.
+1. `php database\database_verify.php`
+2. Re-run the committed suites (`tests/system/security.php`,
+   `tests/system/functional_write.php`, `tests/system/ai_e2e.php`) after any
+   code change, or run `composer test:all`.
 3. Manual smoke: login as each role; attempt a cross-role URL; confirm friendly 500 page.
 4. Confirm no secrets/stack traces in browser console/network when a 500 occurs.

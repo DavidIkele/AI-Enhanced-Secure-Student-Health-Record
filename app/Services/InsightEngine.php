@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 /**
- * Personalized health-insight engine (PROMPT 11).
+ * Personalized health-insight engine.
  *
  * Generates informational, non-diagnostic insights from a student's recorded
  * clinical data. Every insight:

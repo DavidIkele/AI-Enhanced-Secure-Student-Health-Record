@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Healthcare staff data access (PROMPT 6).
+ * Healthcare staff data access.
  *
  * Staff records are referenced by appointments (healthcare_staff_id). Only
  * active staff are offered for booking and management views.

@@ -8,7 +8,7 @@ use PDO;
 
 /**
  * De-identified feature vector builder for the AI decision-support service
- * (PROMPT 12).
+ *.
  *
  * Only aggregate, numeric, non-identifying features are ever computed and sent
  * to the FastAPI service. No names, reg numbers, dates, notes or clinical free

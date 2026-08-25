@@ -7,11 +7,11 @@ namespace App\Services;
 use PDO;
 
 /**
- * Minimal audit logging for health-record operations (PROMPT 5).
+ * Minimal audit logging for health-record operations.
  *
  * Writes to the append-only audit_logs table. The full audit subsystem
- * (PROMPT 14) extends this to login/logout/administrative actions; this
- * foundation covers the health-record events PROMPT 5 requires.
+ * Audit logging extends this to login/logout/administrative actions; this
+ * foundation covers health-record events.
  *
  * Privacy rules enforced here:
  *  - passwords, tokens, API keys and encryption keys are never logged

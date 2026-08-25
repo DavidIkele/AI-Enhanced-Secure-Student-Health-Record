@@ -8,7 +8,7 @@ use App\Exceptions\AppointmentConflictException;
 use PDO;
 
 /**
- * Appointment data access (PROMPT 6).
+ * Appointment data access.
  *
  * Double-booking prevention uses a transaction + row-lock strategy:
  *  1. Begin a transaction.

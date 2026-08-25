@@ -7,9 +7,7 @@
 .development
 .vscode
 .idea
-Dockerfile
 docker-compose.yml
-.dockerignore
 README.md
 tests/
 vendor/
@@ -17,3 +15,8 @@ node_modules/
 app/Logs/*.log
 database/seed_data.err
 *.md
+ai-service/.venv
+ai-service/models/*/v*
+ai-service/models/*.joblib
+ai-service/__pycache__
+ai-service/.pytest_cache

@@ -7,8 +7,12 @@ FROM php:8.3-apache
 #   pdo_mysql - all database access is PDO
 #   curl      - AiClient (HTTP to the FastAPI service)
 #   mbstring  - mb_substr() / mb_strlen() used throughout
-RUN docker-php-ext-install pdo_mysql curl mbstring \
-    && a2enmod rewrite headers
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libcurl4-openssl-dev libonig-dev \
+    && docker-php-ext-install pdo_mysql curl mbstring \
+    && a2dismod mpm_event \
+    && a2enmod rewrite headers \
+    && rm -rf /var/lib/apt/lists/*
 
 # Point the Apache document root at public/ and allow .htaccess overrides.
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
@@ -34,5 +38,11 @@ COPY --chown=www-data:www-data . /var/www/html/
 # Writable log directory.
 RUN mkdir -p /var/www/html/app/Logs \
     && chown -R www-data:www-data /var/www/html/app
+
+# Bind Apache to Railway's PORT (defaults to 80 for local/compose runs).
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
 
 EXPOSE 80

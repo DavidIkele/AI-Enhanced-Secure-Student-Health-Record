@@ -1,4 +1,4 @@
-"""Model packaging helpers (PROMPT 9).
+"""Model packaging helpers .
 
 Builds small demo decision-support models from deterministic synthetic data and
 writes the on-disk package layout consumed by ``ModelRegistry.load``:

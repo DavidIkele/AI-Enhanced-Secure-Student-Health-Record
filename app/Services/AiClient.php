@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 /**
- * Secure HTTP client for the FastAPI decision-support service (PROMPT 12).
+ * Secure HTTP client for the FastAPI decision-support service.
  *
  * Responsibilities:
  *   - server-to-server authentication via the shared X-API-Key header

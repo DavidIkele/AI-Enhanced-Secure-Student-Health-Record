@@ -3,18 +3,18 @@
 declare(strict_types=1);
 
 /**
- * PROMPT 18 — SECURITY TEST SUITE.
+ * SECURITY TEST SUITE.
  *
  * Covers: SQLi, XSS, CSRF, IDOR/BOLA, privilege escalation, auth bypass,
  * session attacks, rate limiting, SSRF (AiClient base-URL guard), and
  * information disclosure (headers, error pages, generic messages).
  *
- * Tests run against the live app at BASE via HttpTestClient.
+ * Tests run against the live app at TEST_BASE_URL via HttpTestClient.
  */
 
 require __DIR__ . '/test_client.php';
 
-$BASE = 'http://localhost/AI-Enhanced%20Secure%20Web-Based%20Student%20Health/public';
+$BASE = test_base_url();
 $pass = 0;
 $fail = 0;
 $failures = [];
@@ -31,12 +31,7 @@ function check(string $label, bool $ok, string $detail = ''): void
 
 function db(): PDO
 {
-    return new PDO(
-        'mysql:host=127.0.0.1;port=3307;dbname=student_health;charset=utf8mb4',
-        'root',
-        '',
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
+    return test_db();
 }
 
 function loginAs(HttpTestClient $c, string $u, string $p): bool
@@ -356,6 +351,8 @@ echo "\n=== SSRF (AiClient allow-list) ===\n";
 // Exercise validatedBaseUrl: point AI_BASE_URL at an internal-metadata host and
 // AI_ALLOWED_HOSTS at a list that excludes it. Real env vars win over .env, so
 // a child process with putenv() values exercises the guard before any network.
+$root = dirname(__DIR__, 2);
+$phpBin = test_php_binary();
 $ssrfTest = <<<'PHP'
 <?php
 declare(strict_types=1);
@@ -363,7 +360,7 @@ putenv('AI_BASE_URL=http://169.254.169.254:8000');
 putenv('AI_ALLOWED_HOSTS=127.0.0.1,localhost');
 putenv('AI_ENABLED=true');
 putenv('AI_API_KEY=dev-ai-service-key');
-$root = 'C:/xampp/htdocs/AI-Enhanced Secure Web-Based Student Health';
+$root = 'ROOT_PLACEHOLDER';
 define('ROOT_PATH', $root);
 define('APP_PATH', $root . '/app');
 define('PUBLIC_PATH', $root . '/public');
@@ -379,8 +376,9 @@ try {
         ? 'BLOCKED' : 'WRONGCATEGORY:' . $e->category() . ':' . $e->getMessage();
 }
 PHP;
+$ssrfTest = str_replace('ROOT_PLACEHOLDER', str_replace('\\', '/', $root), $ssrfTest);
 file_put_contents(sys_get_temp_dir() . '/p18_ssrf.php', $ssrfTest);
-$out = trim(shell_exec('C:\xampp\php\php.exe ' . escapeshellarg(sys_get_temp_dir() . '/p18_ssrf.php') . ' 2>&1'));
+$out = trim(shell_exec(escapeshellarg($phpBin) . ' ' . escapeshellarg(sys_get_temp_dir() . '/p18_ssrf.php') . ' 2>&1'));
 @unlink(sys_get_temp_dir() . '/p18_ssrf.php');
 check('AiClient blocks disallowed host (SSRF guard)', $out === 'BLOCKED', $out);
 

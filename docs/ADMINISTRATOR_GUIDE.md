@@ -35,7 +35,7 @@ profiles, add medical history, record clinic visits. Ownership checks enforced.
 - `GET /appointments/availability` returns free slots (used by the new
   appointment form).
 - Concurrency safe: two simultaneous requests for the same slot produce
-  exactly one appointment (verified in PROMPT 18).
+  exactly one appointment (verified by the system test suite).
 
 ### Analytics
 - `/analytics/visits` — visit history analytics (staff/admin).

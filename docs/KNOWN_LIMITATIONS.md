@@ -14,9 +14,10 @@ limitation is discovered or resolved.
   deterministic synthetic training data shipped with the project. Retraining
   on real, validated data is required before operational use, and the output
   is intentionally never presented as a diagnosis.
-- **No perfect security.** The codebase passes the PROMPT 18 security suite
-  (68 checks) and follows OWASP baseline hardening, but that is not a guarantee
-  against future attacks; environments must be patched and re-checked.
+- **No perfect security.** The codebase passes the committed security test
+  suite (68 checks) and follows OWASP baseline hardening, but that is not a
+  guarantee against future attacks; environments must be patched and
+  re-checked.
 - **No perfect accessibility.** Zero WCAG 2.2 AA violations were recorded on
   the audited screens, but the audit covered a fixed set of pages; screens not
   audited and future changes must be re-tested.
@@ -47,7 +48,7 @@ limitation is discovered or resolved.
   This is an environment security policy, not an application issue; the
   application uses alternative names (`app_entry.php`) and test suites are
   kept in the temp workspace.
-- **AI service currently down** on this machine (stopped during PROMPT 18
+- **AI service currently down** on this machine (stopped during final
   cleanup). Restart per `AI_SERVICE_SETUP.md` before exercising AI features.
 - **Server banner headers visible by default.** Apache (`Server: Apache/2.4.x`)
   and PHP (`X-Powered-By: PHP/8.2.x`) advertise version strings unless the host
@@ -57,12 +58,16 @@ limitation is discovered or resolved.
 
 ## Testing
 
-- **The project is not a Git repository**, so there is no version history or
-  CI to guard regressions; re-run the retained suites after changes.
+- **CI scope.** The project is a Git repository hosted on GitHub with CI
+  (`.github/workflows/ci.yml`) that installs the app, seeds a fresh database
+  and runs the PHP suites plus the AI service tests on every push. However,
+  the accessibility and reliability suites require a browser/DB-failure
+  harness that is not fully automated in CI; re-run the retained suites after
+  changes.
 - **AI service tests require the venv** (`ai-service/.venv`) and network-free
   loopback service; `pytest` in `ai-service/tests` is the authoritative unit
   suite.
 - **Accessibility audit is page-scoped** (Dashboard, Appointments, Students,
   Alerts, Analytics, AI Insights); new UI should be axe-scanned before release.
-- **Performance testing** (PROMPT 17) results are environment-specific; they
-  should be re-measured against the target production hardware.
+- **Performance testing** results are environment-specific; they should be
+  re-measured against the target production hardware.

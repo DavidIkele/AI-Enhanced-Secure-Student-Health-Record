@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Minimal HTTP test client for the PROMPT 18 suites.
+ * Minimal HTTP test client for the system test suites.
  *
  * A small stream-based client (no curl / composer dependencies) that behaves
  * like a browser for the purposes of the functional/security/write/AI e2e

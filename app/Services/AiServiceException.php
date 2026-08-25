@@ -7,7 +7,7 @@ namespace App\Services;
 use RuntimeException;
 
 /**
- * Structured failure for the AI decision-support client (PROMPT 12).
+ * Structured failure for the AI decision-support client.
  *
  * Categories map to user-visible (safe) messages and drive the controller's
  * graceful degradation. Internal detail is available to the logger but never

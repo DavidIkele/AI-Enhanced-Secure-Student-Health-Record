@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 /**
- * PROMPT 18 — FUNCTIONAL WRITE-PATH TESTING.
+ * FUNCTIONAL WRITE-PATH TESTING.
  * Exercises create/update flows through the real HTTP app and verifies DB state.
  * Test data is cleaned up afterwards.
- * Usage: C:\xampp\php\php.exe tests_p18\functional_write.php
+ * Usage: php tests/system/functional_write.php
  */
 
 require __DIR__ . '/test_client.php';
 
-$BASE = 'http://localhost/AI-Enhanced%20Secure%20Web-Based%20Student%20Health/public';
+$BASE = test_base_url();
 $pass = 0;
 $fail = 0;
 $failures = [];
@@ -29,12 +29,7 @@ function check(string $label, bool $ok, string $detail = ''): void
 
 function db(): PDO
 {
-    return new PDO(
-        'mysql:host=127.0.0.1;port=3307;dbname=student_health;charset=utf8mb4',
-        'root',
-        '',
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
+    return test_db();
 }
 
 function loginAs(HttpTestClient $c, string $u, string $p): bool
@@ -165,7 +160,7 @@ $c->get('/records/1/edit');
 $token = $c->csrfFromPage();
 $c->post('/records/1/medical-history', [
     'condition_name' => 'Functional Test Condition',
-    'description' => 'Created by P18 functional test',
+    'description' => 'Created by functional test',
     'onset_date' => date('Y-m-d', strtotime('-1 month')),
     'is_recurring' => '0',
     'severity' => 'mild',

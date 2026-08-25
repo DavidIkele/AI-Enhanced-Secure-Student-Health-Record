@@ -68,7 +68,7 @@ On start it prints the loopback binding, e.g. `binding to 127.0.0.1:8000`.
 | GET | `/v1/models` | yes | Model-version registry |
 | POST | `/v1/predict/{type}` | yes | Decision-support prediction |
 
-## 5. Model layout (PROMPT 9)
+## 5. Model layout
 
 ```
 models/

@@ -72,7 +72,7 @@ outbreak_analytics — aggregate table, no direct identity FK to students
    parents, `CASCADE` for pure compositions, `SET NULL` for audit/actor references).
 3. **Duplicate prevention** — unique keys on usernames/emails, reg numbers, staff ids, one health
    profile per student, per-category outbreak period, notification dedup, and an appointment
-   staff-slot backstop (application-level overlap detection handled in PROMPT 6).
+   staff-slot backstop (application-level overlap detection handles the rest).
 4. **Soft deletes** — `deleted_at` on users/students/staff for retention and auditability;
    clinical rows are never hard-deleted through the application.
 5. **Privacy** — `outbreak_analytics` holds only category aggregates (no identities);

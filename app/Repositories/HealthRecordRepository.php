@@ -9,7 +9,7 @@ use PDO;
 /**
  * Health record data access. One active profile per student (unique student_id).
  *
- * PROMPT 5 scope: the health profile, medical histories, clinic visits and the
+ * Scope: the health profile, medical histories, clinic visits and the
  * clinical detail rows (diagnoses, treatments, medications, vital signs) that
  * belong to a visit. All queries use PDO prepared statements exclusively.
  */

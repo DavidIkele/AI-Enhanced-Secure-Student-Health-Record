@@ -1,4 +1,4 @@
--- PROMPT 10 smoke fixture: temporary coded Dengue cases used by
+-- Outbreak smoke fixture: temporary coded Dengue cases used by
 -- tests/outbreak_detection_smoke.php (transactional, rolled back).
 -- Tokens replaced at runtime: {student_id}, {date}
 INSERT INTO clinic_visits

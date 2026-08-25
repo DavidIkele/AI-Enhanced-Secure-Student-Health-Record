@@ -14,7 +14,7 @@ use App\Services\AuditLogService;
 use App\Services\AuthService;
 
 /**
- * Outbreak / illness-pattern detection (PROMPT 10).
+ * Outbreak / illness-pattern detection.
  *
  * Authorization:
  *  - analytics.view   view the stored detection results (staff/admin).
@@ -84,7 +84,7 @@ class OutbreakController extends BaseController
             $this->userId()
         );
 
-        // Illness-pattern alerts (PROMPT 13): notify authorized staff/admin
+        // Illness-pattern alerts: notify authorized staff/admin
         // (analytics.view) about flagged periods. Content is category-level
         // aggregate only and references the detection row, so re-running the
         // same range never stacks duplicate alerts.

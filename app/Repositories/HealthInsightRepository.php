@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Personalized health-insight data access (PROMPT 11).
+ * Personalized health-insight data access.
  *
  * Stores insight_type, generated content, data_version and lifecycle status
  * (active / dismissed / expired, read/unread) per student. All writes are

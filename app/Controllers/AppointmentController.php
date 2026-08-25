@@ -17,7 +17,7 @@ use App\Services\AuthService;
 use App\Services\Validator;
 
 /**
- * Appointment management (PROMPT 6).
+ * Appointment management.
  *
  * Authorization model:
  *  - Students (appointments.request) may view their own appointments, request
@@ -597,7 +597,7 @@ class AppointmentController extends BaseController
     }
 
     /**
-     * Create an appointment notification (PROMPT 13). Content is generated
+     * Create an appointment notification. Content is generated
      * from the privacy-safe template (event + date/time only); the request
      * reason is never included. De-duplicated by the repository so the same
      * appointment event cannot notify twice.

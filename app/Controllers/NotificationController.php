@@ -15,7 +15,7 @@ use App\Services\AuditLogService;
 use App\Services\AuthService;
 
 /**
- * Notifications and alerts (PROMPT 13).
+ * Notifications and alerts.
  *
  * The `notifications` table is keyed directly by the recipient user id, so
  * every read/mutation is scoped to the authenticated session user (IDOR/BOLA

@@ -1,4 +1,4 @@
-"""Model registry and versioning structure (PROMPT 8/9).
+"""Model registry and versioning structure .
 
 Regularized layout for trained models:
 
@@ -14,7 +14,7 @@ Regularized layout for trained models:
 registry.json entries:
     {"prediction_type": "...", "version": "1.0", "status": "ready|training|unset"}
 
-Loading (PROMPT 9): ``load`` deserializes the fitted pipeline with joblib,
+Loading : ``load`` deserializes the fitted pipeline with joblib,
 verifies the model file checksum against the value recorded in ``meta.json``
 at packaging time, and requires ``meta.json`` + ``features.json`` sidecars.
 Any missing/corrupt part raises a structured ``ModelLoadError``; models that
@@ -118,7 +118,7 @@ class ModelRegistry:
         )
 
     # ------------------------------------------------------------------
-    # Loading pipeline (PROMPT 9)
+    # Loading pipeline 
     # ------------------------------------------------------------------
     def load(self, prediction_type: str) -> TrainedModel:
         """Return a deserialized model handle, or raise a structured error.

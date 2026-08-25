@@ -1,4 +1,4 @@
-"""API tests for the AI decision-support service (PROMPT 8/9)."""
+"""API tests for the AI decision-support service."""
 
 from __future__ import annotations
 

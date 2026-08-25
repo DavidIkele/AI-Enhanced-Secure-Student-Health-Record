@@ -10,7 +10,7 @@ use App\Services\AuditLogService;
 use App\Services\Validator;
 
 /**
- * Visit History Analytics (PROMPT 7) — non-AI aggregate analytics for staff
+ * Visit History Analytics — non-AI aggregate analytics for staff
  * and administrators.
  *
  * Authorization: requires 'analytics.view' permission (staff/admin only).

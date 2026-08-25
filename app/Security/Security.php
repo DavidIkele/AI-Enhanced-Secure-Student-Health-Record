@@ -14,7 +14,7 @@ namespace App\Security;
  *  - safe string validation helpers
  *
  * This is deliberately a foundation: complete authentication/CSRF flows are
- * added in PROMPT 3.
+ * added during authentication hardening.
  */
 final class Security
 {

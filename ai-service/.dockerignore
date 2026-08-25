@@ -11,5 +11,4 @@ models/*/v*/*
 models/*.joblib
 tests/
 README.md
-Dockerfile
 .dockerignore

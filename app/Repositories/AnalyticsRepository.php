@@ -7,7 +7,7 @@ namespace App\Repositories;
 use PDO;
 
 /**
- * Visit History Analytics (PROMPT 7) — non-AI aggregate analytics.
+ * Visit History Analytics — non-AI aggregate analytics.
  *
  * All queries return only aggregate counts. Individual student identities
  * (names, reg numbers, emails) are never selected, so the results cannot be

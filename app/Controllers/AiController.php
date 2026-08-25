@@ -17,7 +17,7 @@ use App\Services\Logger;
 use App\Services\PredictiveFeatures;
 
 /**
- * Secure PHP-to-FastAPI decision-support integration (PROMPT 12).
+ * Secure PHP-to-FastAPI decision-support integration.
  *
  * Design rules:
  *   - The browser NEVER talks to the FastAPI service. Only this controller
